@@ -1,5 +1,5 @@
 import requests
-from packages.exceptions import NoInputError, AlreadyLookedUpError
+from packages.exceptions import NoInputError, RecentLookUpError, InvalidAPIKey
 
 
 class Player():
@@ -25,8 +25,10 @@ class Player():
             data = requests.get("https://api.hypixel.net/player?key=" + api + "&name=" + username).json()
         else:
             raise NoInputError
-        try:
-            if(data["success"] is True and data["player"] is not None):
+
+        if data["success"] is True:
+
+            if data["player"] is not None:
                 self.username = data["player"]["playername"]
                 self.uuid = data["player"]["uuid"]
 
@@ -49,12 +51,17 @@ class Player():
                 self.games_played = data["games_played_bedwars"]
                 self.bed_break_lose_ratio = data["beds_broken_bedwars"]/data["beds_lost_bedwars"]
 
-            elif(data["player"] is None):
+            elif data["player"] is None:
                 self.username = username
                 self.rank = "NICK"
-        except KeyError:
-            if(data["cause"] == "You have already looked up this name recently"):
-                raise AlreadyLookedUpError
+
+        else:
+            if data["cause"] == "You have already looked up this name recently":
+                raise RecentLookUpError
+
+            if data["cause"] == "Invalid API key":
+                raise InvalidAPIKey
+
 
 
 
@@ -99,5 +106,5 @@ class Player():
 
 
 gb80 = Player()
-gb80.fetch_stats_api("My_Api", username="bruhwtfokslmsdao")
+gb80.fetch_stats_api("MY_API", username="Aspas_")
 gb80.print_stats()
