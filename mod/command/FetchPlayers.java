@@ -1,5 +1,8 @@
 package com.tutorial.mod.command;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Collection;
 
 import net.minecraft.client.Minecraft;
@@ -28,12 +31,29 @@ public class FetchPlayers extends CommandBase {
 		// TODO Auto-generated method stub
 		Collection<NetworkPlayerInfo> players = Minecraft.getMinecraft().getNetHandler().getPlayerInfoMap();
     	
-		for (NetworkPlayerInfo loadedPlayer : players) {
-			String loadedPlayerName = Minecraft.getMinecraft().ingameGUI.getTabList().getPlayerName(loadedPlayer);
-    		if (loadedPlayerName != null){
-    			sender.addChatMessage(new ChatComponentText(loadedPlayerName));
-    		}
-		}		
+		File nameFile = new File("playerNames.txt");
+
+
+		try {
+			FileWriter nameWriter = new FileWriter("playerNames.txt");
+		
+		
+			for (NetworkPlayerInfo loadedPlayer : players) {
+				String loadedPlayerName = Minecraft.getMinecraft().ingameGUI.getTabList().getPlayerName(loadedPlayer);
+				
+	    		if (loadedPlayerName != null){
+	    			
+	    			nameWriter.write(loadedPlayerName + "\n");
+	    			sender.addChatMessage(new ChatComponentText(loadedPlayerName));
+	    		}
+			}
+			
+			nameWriter.close();
+		}catch(IOException e) {
+			System.out.println("Error");
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
