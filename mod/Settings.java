@@ -65,7 +65,7 @@ public class Settings {
 		String jsonString = settings_get_json_str();
 		JSONObject jObj = new JSONObject(jsonString);
 		String setting = jObj.getString(Key);
-		System.out.println(setting);
+//		System.out.println(setting);
 		return setting;
 	}
 
@@ -74,7 +74,7 @@ public class Settings {
 		String jsonString = settings_get_json_str();
 		JSONObject jObj = new JSONObject(jsonString);
 		boolean setting = jObj.getBoolean(Key);
-		System.out.println(setting);
+//		System.out.println(setting);
 		return setting;
 	}
 	

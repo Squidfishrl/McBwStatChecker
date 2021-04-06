@@ -13,6 +13,7 @@ import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
+import playerLogger.SquidFish.mod.Reference;
 
 public class FetchPlayers extends CommandBase {
 
@@ -33,11 +34,11 @@ public class FetchPlayers extends CommandBase {
 		// TODO Auto-generated method stub
 		Collection<NetworkPlayerInfo> players = Minecraft.getMinecraft().getNetHandler().getPlayerInfoMap();
     	
-		File nameFile = new File("playerNames.txt");
+		File nameFile = new File(Reference.PLAYER_LOG_FILE_NAME);
 
 
 		try {
-			FileWriter nameWriter = new FileWriter("playerNames.txt");
+			FileWriter nameWriter = new FileWriter(Reference.PLAYER_LOG_FILE_NAME);
 		
 		
 			for (NetworkPlayerInfo loadedPlayer : players) {
