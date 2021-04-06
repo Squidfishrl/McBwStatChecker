@@ -10,8 +10,6 @@ import java.nio.file.Paths;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import net.minecraft.util.ChatComponentText;
-
 
 public class Settings {
 

@@ -27,7 +27,6 @@ public class AutoFetchPlayers extends CommandBase{
 	@Override
 	public void processCommand(ICommandSender sender, String[] args) throws CommandException {
 
-		System.out.println("why the hell am I here");
 		boolean auto_setting = (boolean) Settings.settings_read_value_bool(Reference.SETTINGS_AUTO_FETCH_PLAYERS);
 		String replyMsg = "";
 		

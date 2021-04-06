@@ -6,13 +6,11 @@ import java.io.IOException;
 import java.util.Collection;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
 import playerLogger.SquidFish.mod.Reference;
 
 public class FetchPlayers extends CommandBase {
@@ -57,8 +55,12 @@ public class FetchPlayers extends CommandBase {
 			e.printStackTrace();
 		}
 		
-//		String serverName = Minecraft.getMinecraft().getCurrentServerData().serverName;
-//		System.out.println(serverName);
+		String serverName = Minecraft.getMinecraft().getCurrentServerData().serverName;
+		String serverIp = Minecraft.getMinecraft().getCurrentServerData().serverIP;
+		String serverMOTD = Minecraft.getMinecraft().getCurrentServerData().serverMOTD;
+		sender.addChatMessage(new ChatComponentText("Name - " + serverName));
+		sender.addChatMessage(new ChatComponentText("IP - " + serverIp));
+		sender.addChatMessage(new ChatComponentText("MOTD - " + serverMOTD));
 		
 	}
 
