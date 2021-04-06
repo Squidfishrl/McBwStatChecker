@@ -1,11 +1,13 @@
-package com.tutorial.mod;
+package playerLogger.SquidFish.mod;
 
 public class Reference {
 	
-	public static final String MOD_ID = "1stMod";
-	public static final String MOD_NAME = "tutorialMod";
-	public static final String VERSION = "1.0";
+	public static final String MOD_ID = "pl";
+	public static final String MOD_NAME = "PlayerLogger";
+	public static final String VERSION = "1.0.1";
+
+	public static final String PLAYER_LOG_FILE_NAME = "playerNames.txt";
+	public static final String SETTINGS_FILE_NAME = "log_settings.json";
 	
-	public static final String CLIENT_PROXY_CLASS = "com.tutorial.mod.proxy.ClientProxy";
-	public static final String SERVER_PROXY_CLASS = "com.tutorial.mod.proxy.CommonProxy";
+	public static final String SETTINGS_AUTO_FETCH_PLAYERS = "AutoFetchPlayers";
 }
