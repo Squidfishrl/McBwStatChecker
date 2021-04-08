@@ -59,7 +59,7 @@ public class OnChatMsgRecieved {
 				
 				String playerName = msg.split(" ", 2)[0];
 				
-				PlayerLog.rm_from_log(playerName);
+				PlayerLog.remove_to_log(playerName);
 
 
 			}else if(msg.indexOf(Reference.IN_LOBBY_TRIGGER) > 0 && msg.indexOf(Minecraft.getMinecraft().thePlayer.getName()) != -1) {

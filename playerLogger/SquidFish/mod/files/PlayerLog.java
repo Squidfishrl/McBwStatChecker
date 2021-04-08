@@ -25,14 +25,14 @@ public class PlayerLog {
 	public static void append_to_log(String playerName) throws FileNotFoundException {
 		
 			PrintWriter pw = new PrintWriter(new FileOutputStream(Reference.PLAYER_LOG_FILE_NAME, true));
-			pw.println("add" + playerName);
+			pw.println("add "+ playerName);
 			pw.close();
 	}
 	
 	public static void remove_to_log(String playerName) throws FileNotFoundException {
 		// adds rm <playername>
 		PrintWriter pw = new PrintWriter(new FileOutputStream(Reference.PLAYER_LOG_FILE_NAME, true));
-		pw.println("rm" + playerName);
+		pw.println("rm " + playerName);
 		pw.close();
 	}	
 	
