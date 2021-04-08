@@ -1,6 +1,7 @@
 from resources.fetchStats import Player
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
+from concurrent.futures import ThreadPoolExecutor
 import time
 import os
 
@@ -9,6 +10,12 @@ class FHandler(FileSystemEventHandler):
 
     def __init__(self):
         self.AlrReadLine = 0
+
+    def printAndFetch(self, username):
+        player = Player()
+        player.fetch_stats_no_api(username)
+        # player.print_stats()
+
 
     def on_modified(self, event):
         # method has to be called on_modified else watchdogs doesnt send events
@@ -21,23 +28,32 @@ class FHandler(FileSystemEventHandler):
 
             playerLogCommands = open("/home/ivo/.minecraft/playerNames.txt", 'r')
 
-            for lineCount, line in enumerate(playerLogCommands):
+            try:
+                threads = []
+                with ThreadPoolExecutor(max_workers=16-self.AlrReadLine) as executor:
 
-                if lineCount < self.AlrReadLine:
-                    # i've already read this line
-                    continue
-                elif lineCount == self.AlrReadLine:
-                    # it's my first time reading this line
+                    for lineCount, line in enumerate(playerLogCommands):
+                        print(line)
+                        if lineCount < self.AlrReadLine:
+                            # i've already read this line
+                            continue
+                        else:
+                            # it's my first time reading this line
 
-                    # process line:
-                    lineArr = str.split(line)
+                            # process line:
 
-                    if lineArr[0] == "add":
-                        player = Player()
-                        player.fetch_stats_no_api(lineArr[1])
-                        player.print_stats()
-                        
-                    self.AlrReadLine += 1
+                            lineArr = str.split(line)
+                            print(line)
+                            if lineArr[0] == "add":
+                                threads.append(executor.submit(self.printAndFetch, lineArr[1]))
+
+                            self.AlrReadLine += 1
+            except ValueError:
+                # parsed the entire file
+                playerLogCommands = open("/home/ivo/.minecraft/playerNames.txt", 'r+')
+                playerLogCommands.truncate()
+                playerLogCommands.close()
+                self.AlrReadLine = 0
 
             playerLogCommands.close()
 
