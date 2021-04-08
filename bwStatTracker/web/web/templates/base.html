@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Bed Wars Tracker</title>
+        <link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    </head>
+    <body>
+        <div class=navbarBox>
+            <table class=navbar>
+                <tr>
+
+                    <td class=navbarCell>
+                        <a class=navbarLink href="/"> <p> <b>Game stats</b> </p> </a>
+                    </td>
+
+                    <td class=navbarCell>
+                        <a class=navbarLink href="/"> <p> <b>Session</b> </p> </a>
+                    </td>
+
+                    <td class=navbarCell>
+                        <a class=navbarLink href="/"> <p> <b>Settings</b> </p> </a>
+                    </td>
+
+                    <!-- <td class=navbarCell>
+                        <a class=navbarLink href="/"> <p> <b></b> </p> </a>
+                    </td>
+
+                    <td class=navbarCell>
+                        <a class=navbarLink href="/"> <p> <b></b> </p> </a>
+                    </td> -->
+
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            {% block content %}{%endblock%}
+        </div>
+    </body>
+</html>

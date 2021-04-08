@@ -1,0 +1,75 @@
+{%extends "base.html"%}
+
+{%block content%}
+
+
+
+<h1 class="infoText"> <b> Game stats </b> </h1>
+
+{%for i in data%}
+
+{%if loop.index % 2 == 0%}
+<div class="row">
+    <div class="column" style="background-color: rgba(150, 0, 0, 0.3);">
+
+
+    <table class="statTable">
+
+
+        <tr class="statsRow">
+            <p class="statsText">{{i.rank}} {{i.username}} {{i.stars}}☆</p>
+        </tr>
+
+        <tr class="statsRow">
+            <div class="statsRowDiv">
+                <th class="statsCell"><p class="statsText">fkdr</p></th>
+                <th class="statsCell"><p class="statsText">wlr</p></th>
+                <th class="statsCell"><p class="statsText">bblr</p></th>
+                <th class="statsCell"><p class="statsText">ws</p></th>
+            </div>
+
+        </tr>
+
+        <tr class="statsRow">
+            <td class="statsCell"><p class="statsText">{{i.final_kdr}}</p></td>
+            <td class="statsCell"><p class="statsText">{{i.win_lose_ratio}}</p></td>
+            <td class="statsCell"><p class="statsText">{{i.bed_break_lose_ratio}}</p></td>
+            <td class="statsCell"><p class="statsText">{{i.winstreak}}</p></td>
+        </tr>
+     </table>
+    </div>
+</div>
+{%else%}
+  <div class="column" style="background-color: rgba(0,0,150,0.3);">
+      <table class="statTable">
+
+
+          <tr class="statsRow">
+             <p class="statsText">{{i.rank}} {{i.username}} {{i.stars}}☆</p>
+          </tr>
+
+          <tr class="statsRow">
+              <div class="statsRowDiv">
+                  <th class="statsCell"><p class="statsText">fkdr</p></th>
+                  <th class="statsCell"><p class="statsText">wlr</p></th>
+                  <th class="statsCell"><p class="statsText">bblr</p></th>
+                  <th class="statsCell"><p class="statsText">ws</p></th>
+              </div>
+
+          </tr>
+
+          <tr class="statsRow">
+              <td class="statsCell"><p class="statsText">{{i.final_kdr}}</p></td>
+              <td class="statsCell"><p class="statsText">{{i.win_lose_ratio}}</p></td>
+              <td class="statsCell"><p class="statsText">{{i.bed_break_lose_ratio}}</p></td>
+              <td class="statsCell"><p class="statsText">{{i.winstreak}}</p></td>
+          </tr>
+       </table>
+  </div>
+{%endif%}
+{%endfor%}
+
+
+
+
+{%endblock content%}

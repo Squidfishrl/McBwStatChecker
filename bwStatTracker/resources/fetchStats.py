@@ -16,6 +16,7 @@ class Player():
         self.wins = None
         self.games_played = None
         self.winstreak = None
+        self.team_colour = None
 
     def fetch_stats_api(self, api, uuid: str = "", username: str = ""):
 
@@ -104,7 +105,7 @@ class Player():
         print("games_played -", self.games_played)
         print("\n")
 
-# 
+#
 # gb80 = Player()
 # gb80.fetch_stats_api("MY_API", username="Aspas_")
 # gb80.print_stats()
