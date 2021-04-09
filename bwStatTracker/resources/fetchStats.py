@@ -18,11 +18,12 @@ class Player():
         self.winstreak = None
         self.team_colour = None
 
+
     def fetch_stats_api(self, api, uuid: str = "", username: str = ""):
 
-        if(uuid):
+        if(uuid != ""):
             data = requests.get("https://api.hypixel.net/player?key=" + api + "&name=" + uuid).json()
-        elif(username):
+        elif(username != ""):
             data = requests.get("https://api.hypixel.net/player?key=" + api + "&name=" + username).json()
         else:
             raise NoInputError
@@ -68,10 +69,10 @@ class Player():
 
     def fetch_stats_no_api(self, uuid: str = "", username: str = ""):
 
-        if(uuid):
-            data = requests.get("https://api.slothpixel.me/api/players/" + uuid).json()
-        elif(username):
+        if(username != ""):
             data = requests.get("https://api.slothpixel.me/api/players/" + username).json()
+        elif(uuid != ""):
+            data = requests.get("https://api.slothpixel.me/api/players/" + uuid).json()
         else:
             raise NoInputError
 

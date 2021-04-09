@@ -17,6 +17,7 @@ def create_app(data="", test_config=None):
     else:
         app.config.from_mapping(test_config)
 
+
     try:
         os.makedirs(app.instance_path)
     except OSError:

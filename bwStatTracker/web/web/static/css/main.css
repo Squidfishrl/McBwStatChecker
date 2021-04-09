@@ -1,0 +1,143 @@
+
+/* common */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(23, 25, 26);
+}
+
+/* Navigation bar */
+
+.navbar{
+    background-color: black;
+    height: 1%;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.navbarCell{
+    text-align: center;
+}
+
+
+.navbarLink{
+    color: rgb(236, 148, 46);
+    text-decoration: none;
+}
+
+.navbarBox{
+    background-color:  	#23272a;
+}
+
+/* game stats */
+
+.statsRow{
+
+}
+
+.infoText{
+
+    color: rgb(236, 148, 46);
+    font-size: 150%;
+    padding-top: 5%;
+}
+/*
+.statsCell{
+    border: 1px solid white;
+} */
+
+.statsText{
+
+    color: rgb(236, 148, 46);
+    position: relative;
+    margin: 0;
+    top: 0;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  border: 1px solid white;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+
+/*
+.statsRowDiv{
+
+    overflow: hidden;
+    width: 100%;
+    height: 500%;
+    border: 1px solid rgb(236, 148, 46);
+}
+
+.leftColumn{
+    border: 1px solid rgb(236, 148, 46);
+    float:left;
+    width: 50%;
+}
+
+.rightColumn{
+    border: 1px solid rgb(236, 148, 46);
+    float:right;
+    width: 50%;
+}
+
+.statsRowDiv:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.statRow{
+    height: 1000%;
+    border: 1px solid white;
+
+}
+/* .scoreboardTable{
+    background-color: #2e3438;
+    border: 1px solid white;
+}
+
+.scoreboardDiv{
+
+    padding-top: 5%;
+    padding-left: 24%;
+    padding-right: 24%;
+    padding-bottom: 5%;
+}
+
+.scoreboardTable{
+    border: 1px solid white;
+    background-color: #2e3438;
+}
+
+.scoreboardText{
+    text-align: center;
+    color: white;
+}
+
+.scoreboardCell{
+    width: 15%;
+}
+
+.levelingInfoDiv{
+    position: relative;
+    border: 1px solid white;
+    background-color: #2e3438;
+    margin-left: 90%;
+    height: 100%;
+    text-align: center;
+    color: lightgray;
+} */
