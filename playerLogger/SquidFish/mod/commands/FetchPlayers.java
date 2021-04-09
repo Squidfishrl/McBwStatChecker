@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetworkPlayerInfo;
@@ -11,7 +13,7 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
+import net.minecraftforge.client.ClientCommandHandler;
 import playerLogger.SquidFish.mod.Reference;
 import playerLogger.SquidFish.mod.files.PlayerLog;
 import playerLogger.SquidFish.mod.files.Settings;
@@ -38,13 +40,7 @@ public class FetchPlayers extends CommandBase {
 	public void processCommand(ICommandSender sender, String[] args) throws CommandException {
 
     	
-		ArrayList<String> playerList;
-		
-		if(Settings.settings_read_value_str(Reference.SETTINGS_PLAYER_LOCATION).equals(Reference.SETTING_PLAYER_LOCATION_BW_GAME)) {
-			playerList = fetch_playerList_coloured();
-		}else {
-			playerList = fetch_playerList_uncoloured();
-		}
+
 		
 //		if(args.length != 0) {
 //			if(args[0].equals("coloured")) {
@@ -62,16 +58,34 @@ public class FetchPlayers extends CommandBase {
 			e.printStackTrace();
 		}
 
-	   for(String name : playerList) {
-		   
-	    	try {
-				PlayerLog.append_to_log(name);
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
+		Timer timer = new Timer();  // timer only exists because my python script cant read the empty log fast enough
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				
+					ArrayList<String> playerList;
+					
+					if(Settings.settings_read_value_str(Reference.SETTINGS_PLAYER_LOCATION).equals(Reference.SETTING_PLAYER_LOCATION_BW_GAME)) {
+						playerList = fetch_playerList_coloured();
+					}else {
+						playerList = fetch_playerList_uncoloured();
+					}
+				
+					for(String name : playerList) {
+					   
+				    	try {
+							PlayerLog.append_to_log(name);
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
+						}
+				    		
+//				    	sender.addChatMessage(new ChatComponentText(name));
+					}
+			
 			}
-	    		
-	    	sender.addChatMessage(new ChatComponentText(name));
-		}
+		}, 300);
+		
+
 
 	}
 
