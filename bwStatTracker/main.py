@@ -1,5 +1,5 @@
 from resources.fetchStats import Player
-from resources.statFile import append_obj
+from resources.statFile import append_obj, modify_obj, clear_file
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -32,8 +32,11 @@ class FHandler(FileSystemEventHandler):
 
             if os.stat("/home/ivo/.minecraft/playerNames.txt").st_size == 0:
                 # file is empty
+                print("wow, really")
                 self.AlrReadLine = 0
                 self.playerArr = []
+                clear_file()
+
             else:
 
                 playerLogCommands = open("/home/ivo/.minecraft/playerNames.txt", 'r')
@@ -54,19 +57,28 @@ class FHandler(FileSystemEventHandler):
                                 lineArr = str.split(line)
                                 print(line)
 
+
                                 if(len(lineArr) == 3):
                                     # find match
+                                    print("DUUUDE")
+                                    found_player = False
                                     for player in self.playerArr:
-                                        if player.username == line[1]:
-                                            player.team_color = colorDict[lineArr[2]]
-                                        else:
-                                            pl = self.fetchStat(line[1])
-                                            pl.team_colour = colorDict[lineArr[2]]
-                                            self.PlayerArr.append(pl)
+                                        if player.username == lineArr[1]:
+                                            print("Please work!!!")
+                                            player.team_colour = colorDict[lineArr[2]]
+                                            modify_obj("username", player.username, "team_colour", player.team_colour)
+                                            found_player = True
+
+                                    if found_player is False:
+                                        pl = self.fetchStat(lineArr[1])
+                                        pl.team_colour = colorDict[lineArr[2]]
+                                        append_obj(pl)
+                                        self.playerArr.append(pl)
                                     # inser colour
                                 else:
                                     if lineArr[0] == "add":
-                                        threads.append(executor.submit(self.fetchStat, username=lineArr[1]))
+
+                                        threads.append(executor.submit(self.fetchStat, lineArr[1]))
 
                                         for task in as_completed(threads):
 
@@ -79,8 +91,10 @@ class FHandler(FileSystemEventHandler):
                                             if exists is False:
                                                 self.playerArr.append(task.result())
                                                 # pass this to webframework
-                                                append_obj(task.result())
                                                 print(task.result().__dict__)
+                                                append_obj(task.result())
+                                                print("it doesnt crash")
+
 
                                     elif lineArr[0] == "rm":
                                         for enum, player in enumerate(self.playerArr):

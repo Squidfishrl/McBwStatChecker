@@ -2,7 +2,7 @@
 
 {%block content%}
 
-<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
 <body onload="setInterval(updateElement, 2000)">
 
 <h1 class="infoText"> <b> Game stats </b> </h1>
@@ -66,10 +66,6 @@
         </table>
     </div>
 {%endif%}
-
-<script>
-    updateElement({{i}}, data)
-</script>
 
 {%endfor%}
 
