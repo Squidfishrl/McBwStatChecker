@@ -5,13 +5,12 @@
 
 <body onload="setInterval(updateElement, 2000)">
 
-<h1 class="infoText"> <b> Game stats </b> </h1>
-
+<h1 class="infoText"> <b> Bed Wars stats - fkdr wlr bblr ws</b> </h1>
 
 {%for i in range(1, 17) %}
 {%if i % 2 == 0%}
 <div class="row">
-    <div class="column" id="div{{i}}" style="background-color: black; display: block;">
+    <div class="column" id="div{{i}}">
 
     <table class="statTable">
 
@@ -19,7 +18,7 @@
             <p class="statsText" id="name{{i}}">rank username stars☆</p><br>
         </tr>
 
-        <tr class="statsRow">
+        <!-- <tr class="statsRow">
             <div class="statsRowDiv">
                 <th class="statsCell"><p class="statsText">fkdr</p></th>
                 <th class="statsCell"><p class="statsText">wlr</p></th>
@@ -27,7 +26,7 @@
                 <th class="statsCell"><p class="statsText">ws</p></th>
             </div>
 
-        </tr>
+        </tr> -->
 
         <tr class="statsRow">
             <td class="statsCell"><p class="statsText" id="fkdr{{i}}">{{i}}</p></td>
@@ -39,7 +38,7 @@
     </div>
 </div>
 {%else%}
-        <div class="column" id="div{{i}}" style="background-color: black; display: block;">
+        <div class="column" id="div{{i}}">
         <table class="statTable">
 
 
@@ -47,7 +46,7 @@
                 <p class="statsText" id="name{{i}}">rank username stars☆</p><br>
             </tr>
 
-            <tr class="statsRow">
+            <!-- <tr class="statsRow">
                 <div class="statsRowDiv">
                     <th class="statsCell"><p class="statsText">fkdr</p></th>
                     <th class="statsCell"><p class="statsText">wlr</p></th>
@@ -55,7 +54,7 @@
                     <th class="statsCell"><p class="statsText">ws</p></th>
                 </div>
 
-            </tr>
+            </tr> -->
 
             <tr class="statsRow">
                 <td class="statsCell"><p class="statsText" id="fkdr{{i}}">{{i}}</p></td>

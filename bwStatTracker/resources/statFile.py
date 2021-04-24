@@ -2,6 +2,19 @@ import json
 import os
 
 
+def delete_obj(obj):
+
+    data = json.load(open(fileDir))
+
+    for i in range(len(data)):
+        if data[i]["username"] == obj.username:
+            data.pop(i)
+            break
+
+    open(fileDir, "w").write(
+        json.dumps(data, sort_keys=True, indent=4)
+    )
+
 def append_obj(obj):
 
     with open(fileDir, 'r+') as f:

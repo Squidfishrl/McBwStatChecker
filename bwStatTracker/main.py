@@ -1,12 +1,12 @@
 from resources.fetchStats import Player
-from resources.statFile import append_obj, modify_obj, clear_file
+from resources.statFile import append_obj, modify_obj, clear_file, delete_obj
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import web
 import time
 import os
-from Naked.toolshed.shell import run_js
+# from Naked.toolshed.shell import run_js
 
 
 class FHandler(FileSystemEventHandler):
@@ -26,20 +26,20 @@ class FHandler(FileSystemEventHandler):
     def on_modified(self, event):
         # method has to be called on_modified else watchdogs doesnt send events
 
-        if event.src_path == "/home/ivo/.minecraft/playerNames.txt":
+        print("bro what")
+        if event.src_path == playerLogPath:
 
             print(f'event type: {event.event_type}  path : {event.src_path}')
 
-            if os.stat("/home/ivo/.minecraft/playerNames.txt").st_size == 0:
+            if os.stat(playerLogPath).st_size == 0:
                 # file is empty
-                print("wow, really")
                 self.AlrReadLine = 0
                 self.playerArr = []
                 clear_file()
 
             else:
 
-                playerLogCommands = open("/home/ivo/.minecraft/playerNames.txt", 'r')
+                playerLogCommands = open(playerLogPath, 'r')
 
                 try:
                     threads = []
@@ -57,14 +57,11 @@ class FHandler(FileSystemEventHandler):
                                 lineArr = str.split(line)
                                 print(line)
 
-
                                 if(len(lineArr) == 3):
                                     # find match
-                                    print("DUUUDE")
                                     found_player = False
                                     for player in self.playerArr:
                                         if player.username == lineArr[1]:
-                                            print("Please work!!!")
                                             player.team_colour = colorDict[lineArr[2]]
                                             modify_obj("username", player.username, "team_colour", player.team_colour)
                                             found_player = True
@@ -97,15 +94,19 @@ class FHandler(FileSystemEventHandler):
 
 
                                     elif lineArr[0] == "rm":
+                                        print("searching for remove");
                                         for enum, player in enumerate(self.playerArr):
-                                            if player.username == line[1]:
+                                            print(player.username, line[1])
+                                            if player.username == lineArr[1]:
                                                 self.playerArr.pop(enum)
+                                                print("removed player")
+                                                delete_obj(player)
 
                                 self.AlrReadLine += 1
 
                 except ValueError:
                     # parsed the entire file
-                    playerLogCommands = open("/home/ivo/.minecraft/playerNames.txt", 'r+')
+                    playerLogCommands = open(playerLogPath, 'r+')
                     playerLogCommands.truncate()
                     playerLogCommands.close()
                     self.AlrReadLine = 0
@@ -114,22 +115,22 @@ class FHandler(FileSystemEventHandler):
 
 
 colorDict = {
-    "R": "120, 0, 0",
+    "R": "255, 0, 0",
     "W": "255, 255, 255",
     "S": "128, 128, 128",
-    "P": "255, 0, 255",
+    "P": "128, 0, 128",
     "B": "0, 0, 255",
     "A": "0, 255, 255",
     "Y": "255, 255, 0",
     "G": "0, 128, 0"
 }
 
+playerLogPath = "/home/ivo/.minecraft/playerNames.txt"
 
 if __name__ == '__main__':
 
     event_handler = FHandler()
     observer = Observer()
-    playerLogPath = "/home/ivo/.minecraft/playerNames.txt"
     observer.schedule(event_handler, path=playerLogPath, recursive=False)
     observer.start()
 

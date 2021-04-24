@@ -53,9 +53,20 @@ body {
 .statsText{
 
     color: rgb(236, 148, 46);
+    font-weight: bold;
     position: relative;
     margin: 0;
     top: 0;
+    /* makes text more noticable on any background*/
+    text-shadow:
+     0.05em 0 black,
+     0 0.05em black,
+     -0.05em 0 black,
+     0 -0.05em black,
+     -0.05em -0.05em black,
+     -0.05em 0.05em black,
+     0.05em -0.05em black,
+     0.05em 0.05em black;
 }
 
 .column {
@@ -63,6 +74,7 @@ body {
   width: 50%;
   padding: 10px;
   border: 1px solid white;
+  display: none;
 }
 
 .row:after {
